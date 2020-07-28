@@ -1,9 +1,10 @@
 # Set working directory and import datafiles
 # Your working directory might vary
+# আমরা যদি আর-ষ্টুডিও ক্লাউড ব্যবহার করি 
 
-setwd("~/datasets/titanic")
-train <- read.csv("~/datasets/titanic/train.csv")
-test <- read.csv("~/datasets/titanic/test.csv")
+setwd("/cloud/project/ML-workbook")
+train <- read.csv("train.csv")
+test <- read.csv("test.csv")
 
 # We need to Install + load packages for decision trees and random forests
 
@@ -148,3 +149,9 @@ fit2 <- cforest(as.factor(Survived) ~ Pclass + Sex + Age + SibSp + Parch + Fare 
 MyPredict <- predict(object = fit2, newdata = test, OOB=TRUE, type = "response")
 predict7th <- data.frame(PassengerId = test$PassengerId, Survived = MyPredict)
 write.csv(predict7th, file = "tree2.csv", row.names = FALSE)
+                                 
+# অথবা আগেরটা 
+
+Prediction <- predict(fit, test)
+submit <- data.frame(PassengerId = test$PassengerId, Survived = Prediction)
+write.csv(submit, file = "tree3.csv", row.names = FALSE)
